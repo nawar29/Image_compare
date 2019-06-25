@@ -9,10 +9,6 @@ from skimage import data, img_as_float
 from skimage.measure import compare_ssim as ssim
 import matplotlib.pyplot as plt
 import numpy as np
-original = cv2.imread("expertise.png")
-contrast = cv2.imread("expertise - Copy.png")
-compare_images(original, original, "Original vs. Contrast")
-
 
 def mse(imageA, imageB):
 	# the 'Mean Squared Error' between the two images is the
@@ -29,7 +25,7 @@ def compare_images(imageA, imageB, title):
 	# compute the mean squared error and structural similarity
 	# index for the images
 	m = mse(imageA, imageB)
-	s = ssim(imageA, imageB)
+	s = ssim(imageA, imageB,multichannel=True)
 
 	# setup the figure
 	fig = plt.figure(title)
@@ -44,7 +40,6 @@ def compare_images(imageA, imageB, title):
 	ax = fig.add_subplot(1, 2, 2)
 	plt.imshow(imageB, cmap = plt.cm.gray)
 	plt.axis("off")
-
 	# show the images
 	plt.show()
 
@@ -54,6 +49,13 @@ def compare_images(imageA, imageB, title):
 # to store the images themselves
 index = {}
 images = {}
+original = cv2.imread("expertise.png")
+contrast = cv2.imread("expertise - Copy.png")
+compare_images(contrast, original, "Original vs. Contrast")
+
+#
+
+
 
 # loop over the image paths
 #for imagePath in glob.glob(args["dataset"] + "/*.png"):
